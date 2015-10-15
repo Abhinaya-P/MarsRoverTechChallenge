@@ -1,32 +1,30 @@
 import java.util.Scanner;
-public class MarsChallenge
-{
-	public static void main(String args[])
-	{
-		int x,y;
-		int test;
-		String s = null;
-		char h;
-		Scanner in = new Scanner(System.in);
-		System.out.println("Enter the number of test cases");
-		test = in.nextInt();
-		while(test > 0)
-		{
-			System.out.println("Enter the upper right coordinates of the plateau:");
-			x = in.nextInt();
-			y = in.nextInt();
-			Area a = new Area();
-			a.set(x,y);
-			System.out.println("Enter the position and heading of the rover: ");
-			x = in.nextInt();
-			y = in.nextInt();
-			h = in.next().charAt(0);
-			MarsRover mr = new MarsRover(x,y,h,a);
-			in.nextLine();
-			System.out.println("Enter the control string :");
-			s = in.nextLine();
-			MarsRoverController mrc = new MarsRoverController(s,mr);
-			test = test - 1;
-		}
-	}
-}	
+
+public class MarsChallenge {
+    public static void main(String args[]) {
+        int xCoordinate, y;
+        int numberOfCase;
+        String instruction = null;
+        char h;
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the number of test cases");
+        numberOfCase = in.nextInt();
+        while (numberOfCase > 0) {
+            System.out.println("Enter the upper right coordinates of the plateau:");
+            xCoordinate = in.nextInt();
+            y = in.nextInt();
+            Area area = new Area();
+            area.set(xCoordinate, y);
+            System.out.println("Enter the position and direction of the rover: ");
+            xCoordinate = in.nextInt();
+            y = in.nextInt();
+            h = in.next().charAt(0);
+            MarsRover marsRover = new MarsRover(xCoordinate, y, h, area);
+            in.nextLine();
+            System.out.println("Enter the control string :");
+            instruction = in.nextLine();
+            new MarsRoverController(instruction, marsRover);
+            numberOfCase = numberOfCase - 1;
+        }
+    }
+}
