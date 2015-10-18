@@ -1,73 +1,48 @@
+public class MarsRover 
+{
+	public char heading;
+	public Position position;
+	public Area area;
+	public Parser parser;
+	
+	MarsRover(int xCoordinate,int yCoordinate,char direction,Area area)
+	{
+		position = new Position();
+		position.setX(xCoordinate);
+		position.setY(yCoordinate);
+		heading = direction;
+		parser = new Parser(this);
+		this.area = area;
+	}
 
-public class MarsRover {
-    char position;
-    int x, y;
-    Area area;
-
-    MarsRover(int a, int b, char h, Area area) {
-        x = a;
-        y = b;
-        position = h;
-        this.area = area;
-    }
-
-    public void parse(char command) {
-        if (command == 'M') {
-            switch (position) {
-                case 'N':
-                    y = y + 1;
-                    break;
-                case 'S':
-                    y = y - 1;
-                    break;
-                case 'E':
-                    x = x + 1;
-                    break;
-                case 'W':
-                    x = x - 1;
-                    break;
-                default:
-                    break;
-            }
-        } else if (command == 'L') {
-            switch (position) {
-                case 'N':
-                    position = 'W';
-                    break;
-                case 'W':
-                    position = 'S';
-                    break;
-                case 'S':
-                    position = 'E';
-                    break;
-                case 'E':
-                    position = 'N';
-                    break;
-                default:
-                    break;
-            }
-        } else if (command == 'R') {
-            switch (position) {
-                case 'N':
-                    position = 'E';
-                    break;
-                case 'E':
-                    position = 'S';
-                    break;
-                case 'S':
-                    position = 'W';
-                    break;
-                case 'W':
-                    position = 'N';
-                    break;
-                default:
-                    break;
-            }
-        }
-        if (x < 0 || x > area.upper_x || y < 0 || y > area.upper_y) {
-            System.out.println("Invalid Move");
-        } else {
-            System.out.println("The position of the Rover: " + x + " ," + y + " " + position);
-        }
-    }
+	public boolean isValidPosition()
+	{
+		if( position.getX() < 0 || position.getX() > area.upper_x || position.getY() < 0 || position.getY() > area.upper_y )
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	public void displayCurrentPosition()
+	{
+		System.out.println("(x,y) : " + "(" + position.getX() + "," + position.getY() + ")" + "facing : " + heading );
+	}
+	
+	public void parse(char command)
+	{
+		switch(command)
+		{
+				case 'L': parser.turnLeft();
+						  break;
+				case 'M': parser.moveAhead();
+						  break;
+				case 'R': parser.turnRight();
+						  break;
+				default:  break;
+		}
+	}
+	
 }
