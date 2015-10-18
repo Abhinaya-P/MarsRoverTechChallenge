@@ -1,30 +1,31 @@
 import java.util.Scanner;
-
-public class MarsChallenge {
-    public static void main(String args[]) {
-        int xCoordinate, y;
-        int numberOfCase;
-        String instruction = null;
-        char h;
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter the number of test cases");
-        numberOfCase = in.nextInt();
-        while (numberOfCase > 0) {
-            System.out.println("Enter the upper right coordinates of the plateau:");
-            xCoordinate = in.nextInt();
-            y = in.nextInt();
-            Area area = new Area();
-            area.set(xCoordinate, y);
-            System.out.println("Enter the position and direction of the rover: ");
-            xCoordinate = in.nextInt();
-            y = in.nextInt();
-            h = in.next().charAt(0);
-            MarsRover marsRover = new MarsRover(xCoordinate, y, h, area);
-            in.nextLine();
-            System.out.println("Enter the control string :");
-            instruction = in.nextLine();
-            new MarsRoverController(instruction, marsRover);
-            numberOfCase = numberOfCase - 1;
-        }
-    }
-}
+public class MarsChallenge
+{
+	public static void main(String args[])
+	{
+		int xCoordinate,yCoordinate;
+		int numberOfCases;
+		String controlString = null;
+		char direction;
+		Scanner input = new Scanner(System.in);
+		System.out.println("Enter the number of test cases");
+		numberOfCases = input.nextInt();
+		while(numberOfCases > 0)
+		{
+			System.out.println("Enter the upper right coordinates of the plateau:");
+			xCoordinate = input.nextInt();
+			yCoordinate = input.nextInt();
+			Area area = new Area();
+			area.set(xCoordinate,yCoordinate);
+			System.out.println("Enter the position and heading of the rover: ");
+			xCoordinate = input.nextInt();
+			yCoordinate = input.nextInt();
+			direction = input.next().charAt(0);
+			input.nextLine();
+			System.out.println("Enter the control string :");
+			controlString = input.nextLine();
+			new MarsRoverController(xCoordinate,yCoordinate,direction,area,controlString);
+			numberOfCases = numberOfCases - 1;
+		}
+	}
+}	
